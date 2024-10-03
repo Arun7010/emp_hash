@@ -1,0 +1,33 @@
+import java.util.*;
+class Solution {
+	static char nonrepeatingCharacter(String s) {
+		HashSet<Character> hs = new HashSet<Character>();
+		if (s.length() == 1)
+			return s.charAt(0);
+		for (int i = 0; i < s.length() - 1; i++) {
+			boolean flag = true;
+			if (hs.contains(s.charAt(i))) {
+				continue;
+			} else {
+				for (int j = i + 1; j < s.length(); j++) {
+					if (s.charAt(i) == s.charAt(j)) {
+						hs.add(s.charAt(i));
+						flag = false;
+						break;
+					}
+				}
+			}
+			if (flag)
+				return s.charAt(i);
+		}
+		return '$';
+	}
+}
+public class Main {
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		String s = sc.nextLine();
+		char result = Solution.nonrepeatingCharacter(s);
+		System.out.println(result);
+	}
+}

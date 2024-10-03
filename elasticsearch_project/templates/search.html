@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Search</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Employee Search</h1>
+    <form method="POST">
+        <label for="column_name">Column Name:</label>
+        <select name="column_name" required>
+            <option value="Department">Department</option>
+            <option value="Gender">Gender</option>
+            <option value="Full Name">Full Name</option>
+            <!-- Add more columns as needed -->
+        </select>
+        <br>
+        <label for="column_value">Column Value:</label>
+        <input type="text" name="column_value" required>
+        <br>
+        <button type="submit">Search</button>
+    </form>
+
+    {% if results is not none %}
+        <h2>Search Results:</h2>
+        <ul>
+            {% for employee in results %}
+                <li>{{ employee['Full Name'] }} - {{ employee['Department'] }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>

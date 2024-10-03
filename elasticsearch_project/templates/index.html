@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee API</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Welcome to the Employee API</h1>
+    <p>Use /employees to get all employees or /employees/ to get a specific employee.</p>
+
+    <h2>Department Distribution</h2>
+    <canvas id="departmentChart" width="400" height="200"></canvas>
+
+    <script>
+        // Fetch department facet data
+        fetch('/get_department_data')  // You will need to create this endpoint
+            .then(response => response.json())
+            .then(data => {
+                const labels = data.map(item => item.key);
+                const counts = data.map(item => item.doc_count);
+
+                const ctx = document.getElementById('departmentChart').getContext('2d');
+                const chart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Number of Employees',
+                            data: counts,
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            });
+    </script>
+</body>
+</html>

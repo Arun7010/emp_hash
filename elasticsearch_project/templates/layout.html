@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Employee Dashboard{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Employee Management System</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('employees') }}">Employees</a></li>
+                <li><a href="{{ url_for('search') }}">Search</a></li>
+                <li><a href="{{ url_for('visualizations') }}">Visualizations</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        <!-- Content will be inserted here -->
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Employee Management System</p>
+    </footer>
+</body>
+</html>
